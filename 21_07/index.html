@@ -1,0 +1,33 @@
+<div id="message">Number Guessing Game in HTML</div>
+<div id="guess"></div>
+<input id="inputBox" type="number"/>
+<button id="guessButton">Guess</button>
+<script>
+    let number = parseInt(Math.random() * 100)
+    let message = document.getElementById("message")
+    let guess = document.getElementById("guess")
+    let inputBox = document.getElementById("inputBox")
+    let button = document.getElementById("guessButton")
+
+    let leftComb = 10
+    button.addEventListener('click', ()=>{
+        if(leftComb < 1) {
+            return message.innerHTML = `<p style="background-color: red;display: inline;">Sorry! You are out of turn.</p>`
+        }
+        if(inputBox.value == number) {
+            message.innerHTML = `<p style="background-color: greenyellow;display: inline;">Congratulations!! You guessed correctly.</p>`
+        } else {
+            leftComb --
+            guess.append(`${inputBox.value}, `)
+            if (inputBox.value < number) {
+                message.innerHTML = 
+                `<p style="background-color: red;display: inline;">Sorry your guess is too low, guess higher.
+                You have ${leftComb} guesses left</p>`
+            } else {
+                message.innerHTML = `<p style="background-color: red;display: inline;">Sorry your guess is too high, guess lower.
+                You have ${leftComb} guesses left</p>`
+            }
+            inputBox.value = ''
+        } 
+    })
+</script>
