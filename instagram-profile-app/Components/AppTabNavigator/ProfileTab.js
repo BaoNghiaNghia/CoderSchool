@@ -12,11 +12,11 @@ const avatar = require('../../assets/me.jpg')
 const galleryImages = [
     require('../../assets/gallery/list1-min.jpg'),
     require('../../assets/gallery/list2-min.jpg'),
-    require('../../assets/gallery/list3-min.jpg'),
+    // require('../../assets/gallery/list3-min.jpg'),
     require('../../assets/gallery/list4-min.jpg'),
     require('../../assets/gallery/list5-min.jpg'),
     require('../../assets/gallery/list6-min.jpg'),
-    require('../../assets/gallery/list7-min.jpg'),
+    // require('../../assets/gallery/list7-min.jpg'),
     require('../../assets/gallery/list8-min.jpg'),
     require('../../assets/gallery/list9-min.jpg'),
     require('../../assets/gallery/list10-min.jpg'),
@@ -29,7 +29,7 @@ const galleryImages = [
     require('../../assets/gallery/list17-min.jpg'),
     require('../../assets/gallery/list18-min.jpg'),
     require('../../assets/gallery/list19-min.jpg'),
-    require('../../assets/gallery/list20-min.jpg'),
+    // require('../../assets/gallery/list20-min.jpg'),
     require('../../assets/gallery/list21-min.jpg'),
 
 ]

@@ -105,7 +105,8 @@ const styles = StyleSheet.create({
     story: {
         marginHorizontal: 11,
         borderColor: 'red',
-        borderWidth: 2
+        borderWidth: 2,
+        paddingHorizontal: 10,
     },
     watchAllIconWrapper: {
         flexDirection: 'row',

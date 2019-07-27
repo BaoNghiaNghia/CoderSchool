@@ -26,7 +26,7 @@ export class AddMediaTab extends Component {
 
                 <Content>
                     <View style={styles.container}>
-                        <Text>Add Media</Text>
+                        <Text style={{ maxWidth: '50%' }}>Add Media</Text>
                     </View>
                 </Content>
             </Container>

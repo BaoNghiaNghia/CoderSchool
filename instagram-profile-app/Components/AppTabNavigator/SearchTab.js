@@ -15,19 +15,19 @@ export class SearchTab extends Component {
             <Container>
                 <Header style={styles.header}>
                     <Left>
-                        <Icon name="camera" style={styles.iconTitle}></Icon>
+                        <Icon name="search" style={styles.iconTitle}></Icon>
                     </Left>
                     <Body>
-                        <Text>Instagram</Text>
+                        <Text>Search</Text>
                     </Body>
                     <Right>
                         <Icon name="send" style={styles.iconTitle}></Icon>
                     </Right>
                 </Header>
-                
+
                 <Content>
                     <View style={styles.container}>
-                        <Text>Search</Text>
+                        <Text style={{ maxWidth: '50%' }}>Search</Text>
                     </View>
                 </Content>
             </Container>

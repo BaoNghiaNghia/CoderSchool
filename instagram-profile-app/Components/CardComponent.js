@@ -25,6 +25,12 @@ export default class CardComponent extends Component {
                             <Text note>Jul 25, 2019</Text>
                         </Body>
                     </Left>
+
+                    <Right>
+                        <Button transparent>
+                            <Icon name="more-vertical" style={styles.emotionButton} />
+                        </Button>
+                    </Right>
                 </CardItem>
                 <CardItem>
                     <Image source={image[imageSource]} style={styles.image} />
