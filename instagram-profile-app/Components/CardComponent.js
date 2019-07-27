@@ -41,6 +41,11 @@ export default class CardComponent extends Component {
                             <Icon name="send" style={styles.emotionButton} />
                         </Button>
                     </Left>
+                    <Right>
+                        <Button transparent class=""> 
+                            <Icon name="bookmark" style={styles.emotionButton} />
+                        </Button>
+                    </Right>
                 </CardItem>
                 <CardItem style={styles.text}>
                     <Text>{likes} likes</Text>
@@ -53,6 +58,7 @@ export default class CardComponent extends Component {
                             </Text>
                             Learn to swim by reading books on swimming techniques is impossible, but reading them in parallel with training in the pool results in gaining skills more effectively.
                         </Text>
+                        <Text style={styles.timePosting}>4 minutes ago</Text>
                     </Body>
                 </CardItem>
             </Card>
@@ -74,16 +80,21 @@ const styles = StyleSheet.create({
     },
     emotionButton: {
         color: 'black',
-        fontSize: 17
+        fontSize: 23
     },
     groupButton: {
         height: 45
     },
     text: {
-        height: 20
+        height: 10
     },
     comment: {
         fontWeight: '900'
+    },
+    timePosting: {
+        fontSize: 10,
+        color: 'gray',
+        paddingTop: 3
     }
 })
 

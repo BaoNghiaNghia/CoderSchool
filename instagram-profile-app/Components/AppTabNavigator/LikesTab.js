@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet } from 'react-native'
 
-import { Container, Left, Body, Right, Header } from 'native-base'
+import { Container, Left, Body, Right, Header, Content } from 'native-base'
 import Icon from 'react-native-vector-icons/Feather';
 
 
@@ -13,17 +13,23 @@ export class LikesTab extends Component {
     render() {
         return (
             <Container>
-                <Header>
+                <Header style={styles.header}>
                     <Left>
-                        <Icon name="camera" style={{ paddingLeft: 10 }}></Icon>
+                        <Icon name="camera" style={styles.iconTitle}></Icon>
                     </Left>
                     <Body>
                         <Text>Instagram</Text>
                     </Body>
                     <Right>
-                        <Icon name="send" style={{ paddingRight: 10 }}></Icon>
+                        <Icon name="send" style={styles.iconTitle}></Icon>
                     </Right>
                 </Header>
+
+                <Content>
+                    <View style={styles.container}>
+                        <Text>Likes</Text>
+                    </View>
+                </Content>
             </Container>
         )
     }
@@ -36,5 +42,13 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
+        flexDirection: 'column'
+    },
+    iconTitle: {
+        paddingHorizontal: 10,
+        fontSize: 20
+    },
+    header: {
+        backgroundColor: 'white'
     }
 });

@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
         flex: 3
     },
     story: {
-        marginHorizontal: 9,
+        marginHorizontal: 11,
         borderColor: 'red',
         borderWidth: 2
     },

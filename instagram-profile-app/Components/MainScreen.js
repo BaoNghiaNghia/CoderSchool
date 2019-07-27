@@ -35,7 +35,7 @@ const AppTabNavigator = createBottomTabNavigator({
         screen: ProfileTab
     }
 }, {
-    animationEnabled: true,
+    animationEnabled: false,
     swipeEnabled: true,
     tabBarPosition: 'bottom',
     tabBarOptions: {
