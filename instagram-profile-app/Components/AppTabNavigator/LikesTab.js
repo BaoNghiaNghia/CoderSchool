@@ -2,11 +2,12 @@ import React, { Component } from 'react'
 import { 
     Text, View, StyleSheet, ScrollView, Image,
     TouchableWithoutFeedback, Animated,
-    Dimensions, C
+    Dimensions
 } from 'react-native'
 
+import { Button } from 'native-base'
+
 import Icon from 'react-native-vector-icons/Feather';
-import { SafeAreaView } from 'react-navigation';
 
 const hiphopImage = [
     { id: 1, src: require('../../assets/hiphop/1.jpg')},
@@ -178,7 +179,7 @@ export class LikesTab extends Component {
                         <Animated.Image
                             source={activeImage ? activeImage.src : null}
                             style={[
-                                {resizeMode: 'cover', top: 0, left: 0, height:undefined, width: undefined, zIndex: 1001},
+                                styles.activeImage,
                                 activeImageStyle
                             ]}
                         >
@@ -188,29 +189,71 @@ export class LikesTab extends Component {
                             onPress={this.closeImage()}    
                         >
                             <Animated.View style={[
-                                {position: 'absolute', top: 30, right: 30},
+                                styles.removeImageIconContainer,
                                 animatedCrossOpacity
                             ]}>
-                                <Text style={{fontSize: 25, fontWeight: 'bold', color: 'black'}}>
-                                    X
-                                </Text>
+                                <Icon name="x-circle" style={styles.removeImageIcon} />
                             </Animated.View>
                         </TouchableWithoutFeedback>
                     </View>
                     <Animated.View 
                         style={[
-                            {flex: 1, backgroundColor: 'white', padding: 20, paddingTop: 50, zIndex: 1000},
+                            styles.contentAnimated,
                             animatedContentStyle
                         ]}>
-                        <Text style={{fontSize: 24, paddingBottom: 10}}>
-                            Eiffel tower
-                        </Text>
-                        <Text>
-                            Paris, France
-                        </Text>
-                        <Text>
-                            Lorem ipsum color sit amet, consectetur odipiscing elit. Proin suscipit ullamcorper
-                        </Text>
+                        <View>
+                            <View style={{flexDirection: 'row', justifyContent:'space-between'}}>
+                                <View>
+                                    <Text style={{fontSize: 27, fontWeight: 'bold'}}>
+                                        Eiffel tower
+                                    </Text>
+                                    <View style={styles.locationGroup}>
+                                        <Icon name="map-pin" style={styles.grayColor}/>
+                                        <Text style={[
+                                            styles.locationContent,
+                                            styles.grayColor
+                                        ]}>
+                                            {' '}Paris, France
+                                        </Text>
+                                    </View>
+                                </View>
+                                <View>
+                                    <Button style={styles.cloudDownload}>
+                                        <Icon name="download-cloud" style={[{fontSize: 22}, styles.whiteColor]}/>
+                                    </Button>
+                                </View>
+                            </View>
+                            <View>
+                                <Text style={{ marginTop: 20 }}>
+                                    Learn to swim by reading books on swimming techniques is impossible, but reading them in parallel with training in the pool results in gaining skills more effectively.
+                                </Text>
+                                <View style={{ marginTop: 20, flexDirection: 'row', alignItems: 'flex-start' }}>
+                                    <Text style={styles.chip}>#photograpy</Text>
+                                    <Text style={styles.chip}>#sea</Text>
+                                </View>
+
+                                <View style={styles.emotionButtonContainer}>
+                                    <View style={styles.emotionButtonGroup}>
+                                        <Button transparent>
+                                            <Icon name="heart" style={styles.emotionButton} />
+                                        </Button>
+                                        <Button transparent style={{marginLeft: 20}}>
+                                            <Icon name="message-circle" style={styles.emotionButton} />
+                                        </Button>
+                                        {/* <Button transparent> 
+                                            <Icon name="send" style={styles.emotionButton} />
+                                        </Button> */}    
+                                    </View>
+                                    <View>
+                                        <Button transparent> 
+                                            <Icon name="bookmark" style={styles.emotionButton} />
+                                        </Button>
+                                    </View>
+                                </View>
+                            </View>
+                        </View>
+
+
                     </Animated.View>
                 </View>
             </React.Fragment>
@@ -222,10 +265,11 @@ export default LikesTab
 
 const styles = StyleSheet.create({
     scrollContainer: {
-        flex: 1
+        flex: 1,
+        marginTop: 25
     },
     animatedView: {
-        height: SCREEN_HEIGHT - 150,
+        height: SCREEN_HEIGHT - 250,
         width: SCREEN_WIDTH,
         padding: 15
     },
@@ -235,5 +279,80 @@ const styles = StyleSheet.create({
         height: null,
         resizeMode: 'cover',
         borderRadius: 20
+    },
+    activeImage: {
+        resizeMode: 'cover', top: 0, left: 0, height:undefined, width: undefined, zIndex: 1001,
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
+    },
+    contentAnimated: {
+        flex: 1,
+        backgroundColor: 'white',
+        padding: 20,
+        paddingTop: 50,
+        zIndex: 1000
+    },
+    removeImageIcon: {
+        color: 'white',
+        fontSize: 25
+    },
+    removeImageIconContainer: {
+        position: 'absolute',
+        top: 40,
+        right: 30,
+        zIndex: 1001
+    },
+    locationGroup: {
+        marginTop: 5,
+        flexDirection: 'row',
+        alignItems: 'center',
+
+    },
+    locationContent: {
+        paddingHorizontal: 5,
+        paddingBottom: 3
+    },
+    grayColor: {
+        color: 'gray'
+    },
+    whiteColor: {
+        color: 'white'
+    },
+    cloudDownload: {
+        height: 55,
+        width: 55,
+        justifyContent: 'center',
+        backgroundColor: '#3c72ff',
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
+        borderTopRightRadius: 20,
+        borderTopLeftRadius: 5,
+        shadowColor: '#3c72ff',
+        shadowOffset: { width: 0, height: 10 },
+        shadowOpacity: 0.7,
+        shadowRadius: 2,
+        elevation: 15
+    },
+    emotionButton: {
+        color: 'black',
+        fontSize: 23
+    },
+    chip: {
+        fontSize: 10,
+        color: '#BCBCBC',
+        backgroundColor: '#EEEEEE',
+        borderRadius: 15,
+        paddingVertical: 5,
+        paddingHorizontal: 7,
+        marginRight: 10
+    },
+    emotionButtonContainer: {
+        marginTop: 5,
+        flexDirection: 'row',
+        justifyContent:'space-between'
+    },
+    emotionButtonGroup:{
+        flexDirection: 'row',
+        justifyContent:'space-between'
     }
 });

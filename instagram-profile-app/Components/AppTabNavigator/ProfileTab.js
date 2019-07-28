@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, Image, Dimensions } from 'react-native'
+import { Text, View, StyleSheet, Image, Dimensions, Platform, StatusBar, SafeAreaView } from 'react-native'
 
 import { Container, Content, Header, Left, Body, Right, Button  } from 'native-base'
 
@@ -73,8 +73,8 @@ export class ProfileTab extends Component {
             return (
                 <View key={index} style={[ 
                     {width: (width) / 3}, { height: (height) / 3},
-                    index % 3 !== 0 ? { paddingLeft: 3 } : { paddingLeft: 0 },
-                    { marginBottom: 3 }
+                    index % 3 !== 0 ? { paddingLeft: 5 } : { paddingLeft: 0 },
+                    { marginBottom: 5 }
                  ]}>
                     <Image 
                         style={styles.galleryImage}
@@ -108,93 +108,95 @@ export class ProfileTab extends Component {
         const { activeIndex } = this.state;
 
         return (
-            <Container style={styles.container}>
-                <Header style={styles.header}>
-                    <Left>
-                        <Icon name="user-plus" style={styles.iconTitle}></Icon>
-                    </Left>
-                    <Body>
-                        <Text>Bảo đẹp trai</Text>
-                    </Body>
-                    <Right>
-                        <Icon name="pie-chart" style={styles.iconTitle}></Icon>
-                    </Right>
-                </Header>
-                <Content>
-                    <View>
-                        <View style={styles.rowDirection}>
-                            <View style={{ flex: 1, alignItems: 'center' }}>
-                                <Image source={avatar} style={styles.avatar} />
+            <SafeAreaView style={{flex: 2, backgroundColor: '#fff', paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}}>
+                <Container style={styles.container}>
+                    <Header style={styles.header}>
+                        <Left>
+                            <Icon name="user-plus" style={styles.iconTitle}></Icon>
+                        </Left>
+                        <Body>
+                            <Text>Bảo đẹp trai</Text>
+                        </Body>
+                        <Right>
+                            <Icon name="pie-chart" style={styles.iconTitle}></Icon>
+                        </Right>
+                    </Header>
+                    <Content>
+                        <View>
+                            <View style={styles.rowDirection}>
+                                <View style={{ flex: 1, alignItems: 'center' }}>
+                                    <Image source={avatar} style={styles.avatar} />
+                                </View>
+                                <View style={{flex: 3 }}>
+                                    <View style={styles.amountUser}>
+                                        <View style={styles.alignCenter}>
+                                            <Text>40</Text>
+                                            <Text style={styles.amountUserContent}>photos</Text>
+                                        </View>
+                                        <View style={styles.alignCenter}>
+                                            <Text>120</Text>
+                                            <Text style={styles.amountUserContent}>followers</Text>
+                                        </View>
+                                        <View style={styles.alignCenter}>
+                                            <Text>9</Text>
+                                            <Text style={styles.amountUserContent}>following</Text>
+                                        </View>
+                                    </View>
+
+                                    <View style={styles.rowDirection}>
+                                        <Button bordered dark style={styles.editProfileButton}>
+                                            <Text>Follow</Text>
+                                        </Button>
+
+                                        <Button bordered dark style={styles.settingButton}>
+                                            <Icon name="send" style={{fontSize: 17}}/>
+                                        </Button>
+                                    </View>
+                                </View>
                             </View>
-                            <View style={{flex: 3 }}>
-                                <View style={styles.amountUser}>
-                                    <View style={styles.alignCenter}>
-                                        <Text>40</Text>
-                                        <Text style={styles.amountUserContent}>posts</Text>
-                                    </View>
-                                    <View style={styles.alignCenter}>
-                                        <Text>120</Text>
-                                        <Text style={styles.amountUserContent}>followers</Text>
-                                    </View>
-                                    <View style={styles.alignCenter}>
-                                        <Text>9</Text>
-                                        <Text style={styles.amountUserContent}>following</Text>
-                                    </View>
-                                </View>
 
-                                <View style={styles.rowDirection}>
-                                    <Button bordered dark style={styles.editProfileButton}>
-                                        <Text>Edit Profile</Text>
-                                    </Button>
-
-                                    <Button bordered dark style={styles.settingButton}>
-                                        <Icon name="settings" style={{fontSize: 17}}/>
-                                    </Button>
-                                </View>
+                            <View style={{ paddingTop: 10, paddingBottom: 10, paddingHorizontal: 14 }}>
+                                <Text style={{ fontWeight: 'bold' }}>Bảo đẹp trai</Text>
+                                <Text>Lark | Computer Jock | Travel Enthusiast</Text>
+                                <Text>www.gachi.com</Text>
                             </View>
                         </View>
 
-                        <View style={{ paddingTop: 10, paddingBottom: 10, paddingHorizontal: 14 }}>
-                            <Text style={{ fontWeight: 'bold' }}>Bảo đẹp trai</Text>
-                            <Text>Lark | Computer Jock | Travel Enthusiast</Text>
-                            <Text>www.gachi.com</Text>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-around', borderTopWidth: 1, borderTopColor: '#eae5e5' }}>
+                            <Button 
+                                transparent
+                                onPress={this.segmentClicked(0)}
+                                active={activeIndex == 0}>
+                                <Icon name="grid"
+                                    style={[activeIndex == 0 ? {color: '#79BCFF'} : { color: 'grey' }, { fontSize: 20}]}></Icon>
+                            </Button>
+                            <Button 
+                                transparent
+                                onPress={this.segmentClicked(1)}
+                                active={activeIndex == 1}>
+                                <Icon name="align-left"
+                                    style={[activeIndex == 1 ? {color: '#79BCFF'} : { color: 'grey' }, { fontSize: 20}]}></Icon>
+                            </Button>
+                            <Button 
+                                transparent
+                                onPress={this.segmentClicked(2)}
+                                active={activeIndex == 2}>
+                                <Icon name="users"
+                                    style={[activeIndex == 2 ? {color: '#79BCFF'} : { color: 'grey' }, { fontSize: 20}]}></Icon>
+                            </Button>
+                            <Button 
+                                transparent
+                                onPress={this.segmentClicked(3)}
+                                active={activeIndex == 3}>
+                                <Icon name="bookmark"
+                                    style={[activeIndex == 3 ? {color: '#79BCFF'} : { color: 'grey' }, { fontSize: 20}]}></Icon>
+                            </Button>
                         </View>
-                    </View>
 
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-around', borderTopWidth: 1, borderTopColor: '#eae5e5' }}>
-                        <Button 
-                            transparent
-                            onPress={this.segmentClicked(0)}
-                            active={activeIndex == 0}>
-                            <Icon name="grid"
-                                style={[activeIndex == 0 ? {color: '#79BCFF'} : { color: 'grey' }, { fontSize: 20}]}></Icon>
-                        </Button>
-                        <Button 
-                            transparent
-                            onPress={this.segmentClicked(1)}
-                            active={activeIndex == 1}>
-                            <Icon name="align-left"
-                                style={[activeIndex == 1 ? {color: '#79BCFF'} : { color: 'grey' }, { fontSize: 20}]}></Icon>
-                        </Button>
-                        <Button 
-                            transparent
-                            onPress={this.segmentClicked(2)}
-                            active={activeIndex == 2}>
-                            <Icon name="users"
-                                style={[activeIndex == 2 ? {color: '#79BCFF'} : { color: 'grey' }, { fontSize: 20}]}></Icon>
-                        </Button>
-                        <Button 
-                            transparent
-                            onPress={this.segmentClicked(3)}
-                            active={activeIndex == 3}>
-                            <Icon name="bookmark"
-                                style={[activeIndex == 3 ? {color: '#79BCFF'} : { color: 'grey' }, { fontSize: 20}]}></Icon>
-                        </Button>
-                    </View>
-
-                    {this.renderSection()}
-                </Content>
-            </Container>
+                        {this.renderSection()}
+                    </Content>
+                </Container>
+            </SafeAreaView>
         )
     }
 }
@@ -245,6 +247,7 @@ const styles = StyleSheet.create({
     },
     galleryImage: {
         flex: 1,
+        borderRadius: 10,
         width: undefined,
         height: undefined
     },

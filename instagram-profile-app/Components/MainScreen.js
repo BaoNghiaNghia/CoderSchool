@@ -55,9 +55,7 @@ class MainScreen extends Component {
 
     render() {
         return (
-            <SafeAreaView style={{flex: 2, backgroundColor: '#fff', paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}}>
-                <AppContainerNav/>
-            </SafeAreaView>
+            <AppContainerNav/>
         )
     }
 }

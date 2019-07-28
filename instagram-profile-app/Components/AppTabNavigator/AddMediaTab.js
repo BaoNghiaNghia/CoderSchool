@@ -1,35 +1,46 @@
 import React, { Component } from 'react'
-import { Text, View,StyleSheet } from 'react-native'
+import {
+    View,
+    Text,
+    StyleSheet,
+    Image,
+    SafeAreaView,
+    Platform,
+    StatusBar
+} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
 import { Container, Left, Body, Right, Header, Content } from 'native-base'
 
 export class AddMediaTab extends Component {
     static navigationOptions = {
-        tabBarIcon: ({ tintColor }) => <Icon name="plus-circle" style={{color: tintColor, fontSize: 30 }} />
+        tabBarIcon: ({ tintColor }) => <Icon name="plus-circle" style={{color: tintColor, fontSize: 32 }} />
     }
 
     render() {
         return (
-            <Container>
-                <Header style={styles.header}>
-                    <Left>
-                        <Icon name="camera" style={styles.iconTitle}></Icon>
-                    </Left>
-                    <Body>
-                        <Text>Instagram</Text>
-                    </Body>
-                    <Right>
-                        <Icon name="send" style={styles.iconTitle}></Icon>
-                    </Right>
-                </Header>
+            <SafeAreaView style={{flex: 2, backgroundColor: '#fff', paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}}>
+                <Container>
+                    <Header style={styles.header}>
+                        <Left>
+                            <Icon name="camera" style={styles.iconTitle}></Icon>
+                        </Left>
+                        <Body>
+                            <Text>Instagram</Text>
+                        </Body>
+                        <Right>
+                            <Icon name="send" style={styles.iconTitle}></Icon>
+                        </Right>
+                    </Header>
 
-                <Content>
-                    <View style={styles.container}>
-                        <Text style={{ maxWidth: '50%' }}>Add Media</Text>
-                    </View>
-                </Content>
-            </Container>
+                    <Content>
+                        <View style={styles.container}>
+                            <Text style={{ maxWidth: '50%' }}>Add Media</Text>
+                        </View>
+                    </Content>
+                </Container>
+            
+            </SafeAreaView>
         )
     }
 }

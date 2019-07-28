@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-import { Platform, Text, View, StyleSheet, ScrollView } from 'react-native'
-
-import { SafeAreaView } from 'react-navigation'
+import { Platform, Text, View, StyleSheet, ScrollView, StatusBar, SafeAreaView } from 'react-native'
 
 import Icon from 'react-native-vector-icons/Feather';
 
@@ -37,51 +35,51 @@ export class HomeTab extends Component {
    
     render() {
         return (
+            <SafeAreaView style={{flex: 2, backgroundColor: '#fff', paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}}>
+                <Container>
+                    <Header style={styles.header}>
+                        <Left>
+                            <Icon name="camera" style={styles.iconTitle}></Icon>
+                        </Left>
+                        <Body>
+                            <Text>Instagram</Text>
+                        </Body>
+                        <Right>
+                            <Icon name="send" style={styles.iconTitle}></Icon>
+                        </Right>
+                    </Header>
 
-            <Container>
-                <Header style={styles.header}>
-                    <Left>
-                        <Icon name="camera" style={styles.iconTitle}></Icon>
-                    </Left>
-                    <Body>
-                        <Text>Instagram</Text>
-                    </Body>
-                    <Right>
-                        <Icon name="send" style={styles.iconTitle}></Icon>
-                    </Right>
-                </Header>
+                    <Content>
+                        <View style={styles.container}>
+                            <View style={styles.main}>
+                                <Text style={styles.fontWeightBold}>Stories</Text>
+                                <View style={styles.watchAllIconWrapper}>
+                                    <Icon name="play" style={styles.watchAllIcon}></Icon>
+                                    <Text style={styles.fontWeightBold}> Watch All</Text>
+                                </View>
+                            </View>
+                            <View style={styles.singleStory}>
+                                <ScrollView 
+                                    horizontal={true} 
+                                    showsHorizontalScrollIndicator={false}
+                                    contentContainerStyle={{
+                                        alignItems:'center',
+                                        paddingStart: 10,
+                                        paddingEnd: 10
+                                    }}>
 
-                <Content>
-                    <View style={styles.container}>
-                        <View style={styles.main}>
-                            <Text style={styles.fontWeightBold}>Stories</Text>
-                            <View style={styles.watchAllIconWrapper}>
-                                <Icon name="play" style={styles.watchAllIcon}></Icon>
-                                <Text style={styles.fontWeightBold}> Watch All</Text>
+                                    {this.storyImageRender()}
+                                    
+                                </ScrollView>
                             </View>
                         </View>
-                        <View style={styles.singleStory}>
-                            <ScrollView 
-                                horizontal={true} 
-                                showsHorizontalScrollIndicator={false}
-                                contentContainerStyle={{
-                                    alignItems:'center',
-                                    paddingStart: 10,
-                                    paddingEnd: 10
-                                }}>
 
-                                {this.storyImageRender()}
-                                
-                            </ScrollView>
-                        </View>
-                    </View>
-
-                    <CardComponent imageSource='1' likes="100" userName="Bảo đẹp trai"/>
-                    <CardComponent imageSource='2' likes="150" userName="Hanna Trang"/>
-                    <CardComponent imageSource='3' likes="600" userName="Ali Cô Ba"/>
-                </Content>
-
-            </Container>
+                        <CardComponent imageSource='1' likes="100" userName="Bảo đẹp trai"/>
+                        <CardComponent imageSource='2' likes="150" userName="Hanna Trang"/>
+                        <CardComponent imageSource='3' likes="600" userName="Ali Cô Ba"/>
+                    </Content>
+                </Container>
+            </SafeAreaView>
         )
     }
 }
