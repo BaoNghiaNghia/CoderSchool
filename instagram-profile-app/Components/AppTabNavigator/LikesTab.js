@@ -87,6 +87,35 @@ export class LikesTab extends Component {
         })
     }
 
+    closeImage = () => () => {
+        Animated.parallel([
+            Animated.timing(this.position.x, {
+                toValue: this.oldPosition.x,
+                duration: 300
+            }),
+            Animated.timing(this.position.y, {
+                toValue: this.oldPosition.y,
+                duration: 300
+            }),
+            Animated.timing(this.dimensions.x, {
+                toValue: this.oldPosition.width,
+                duration: 300
+            }),
+            Animated.timing(this.dimensions.y, {
+                toValue: this.oldPosition.height,
+                duration: 300
+            }),
+            Animated.timing(this.animation, {
+                toValue: 0,
+                duration: 300
+            })
+        ]).start(() => {
+            this.setState({
+                activeImage: null
+            })
+        })
+    }
+
     render() {
         const { activeImage } = this.state
 
@@ -99,7 +128,7 @@ export class LikesTab extends Component {
 
         const animatedContentY = this.animation.interpolate({
             inputRange: [0, 1],
-            outputRange: [-150, -40]
+            outputRange: [-150, 0]
         })
 
         const animatedContentOpacity = this.animation.interpolate({
@@ -112,6 +141,10 @@ export class LikesTab extends Component {
             transform: [{
                 translateY: animatedContentY
             }]
+        }
+
+        const animatedCrossOpacity = {
+            opacity: this.animation
         }
 
         return (
@@ -140,18 +173,33 @@ export class LikesTab extends Component {
                     style={StyleSheet.absoluteFill}
                     pointerEvents={ activeImage ? 'auto' : 'none' }>
                     <View 
-                        style={{flex: 2, borderWidth: 1}}
+                        style={{flex: 2, borderWidth: 0.1}}
                         ref={(image) => (this.viewImage = image)}>
                         <Animated.Image
                             source={activeImage ? activeImage.src : null}
-                            style={[{resizeMode: 'cover', top: 0, left: 0, height:undefined, width: undefined}, activeImageStyle]}
+                            style={[
+                                {resizeMode: 'cover', top: 0, left: 0, height:undefined, width: undefined, zIndex: 1001},
+                                activeImageStyle
+                            ]}
                         >
-
                         </Animated.Image>
+
+                        <TouchableWithoutFeedback
+                            onPress={this.closeImage()}    
+                        >
+                            <Animated.View style={[
+                                {position: 'absolute', top: 30, right: 30},
+                                animatedCrossOpacity
+                            ]}>
+                                <Text style={{fontSize: 25, fontWeight: 'bold', color: 'black'}}>
+                                    X
+                                </Text>
+                            </Animated.View>
+                        </TouchableWithoutFeedback>
                     </View>
                     <Animated.View 
                         style={[
-                            {flex: 1, backgroundColor: 'white', padding: 20, paddingTop: 50},
+                            {flex: 1, backgroundColor: 'white', padding: 20, paddingTop: 50, zIndex: 1000},
                             animatedContentStyle
                         ]}>
                         <Text style={{fontSize: 24, paddingBottom: 10}}>
