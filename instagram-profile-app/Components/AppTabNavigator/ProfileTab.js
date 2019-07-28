@@ -83,6 +83,18 @@ export class ProfileTab extends Component {
             )
         })
     }
+
+    renderSecondSection = () => {
+        return (
+            <Text style={styles.textCenter}>All her friend</Text>
+        )
+    }
+
+    renderLastSection = () => {
+        return (
+            <Text style={styles.textCenter}>All her mark</Text>
+        )
+    }
     
     renderSection = () => {
         const { activeIndex } = this.state;
@@ -99,6 +111,18 @@ export class ProfileTab extends Component {
                     <CardComponent imageSource='1' likes="100" userName="Bảo đẹp trai"/>
                     <CardComponent imageSource='2' likes="150" userName="Hanna Trang"/>
                     <CardComponent imageSource='3' likes="600" userName="Ali Cô Ba"/>
+                </View>
+            )
+        } else if (activeIndex === 2) {
+            return(
+                <View style={styles.thirdSection}>
+                    {this.renderSecondSection()}
+                </View>
+            )
+        } else {
+            return(
+                <View style={styles.lastSecond}>
+                    {this.renderLastSection()}
                 </View>
             )
         }
@@ -245,6 +269,16 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap'
     },
+    thirdSection: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    lastSecond: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
     galleryImage: {
         flex: 1,
         borderRadius: 10,
@@ -257,5 +291,8 @@ const styles = StyleSheet.create({
     iconTitle: { 
         paddingHorizontal: 10,
         fontSize: 20
+    },
+    textCenter: {
+        marginTop: 50
     }
 });
