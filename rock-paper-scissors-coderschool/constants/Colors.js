@@ -6,4 +6,5 @@ export default {
   transparentWhite: 'rgba(255,255,255,0.2)',
   lightGreen: 'rgba(0, 161, 0, 1)',
   mediumGreen: 'rgba(143, 204, 0, 1)',
+  orange: '#FF6C00'
 };

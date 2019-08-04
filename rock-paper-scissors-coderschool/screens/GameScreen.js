@@ -68,11 +68,11 @@ export default class GameScreen extends Component {
                 <StatusBar hidden={false} />
                 <View>
                     <FieldHalf typeOfPlayer={players[0]}>
-                        <Scoreboard score={computerScore} typeOfPlayer={players[0]} />
+                        <Scoreboard score={computerScore} ace={computerScore > playerScore ? true:false} typeOfPlayer={players[0]} />
                     </FieldHalf>
 
                     <FieldHalf typeOfPlayer={players[1]}>
-                        <Scoreboard score={playerScore} typeOfPlayer={players[1]} />
+                        <Scoreboard score={playerScore} ace={computerScore < playerScore ? true:false} typeOfPlayer={players[1]} />
                     </FieldHalf>
                     
                     <ImageButtonContainer

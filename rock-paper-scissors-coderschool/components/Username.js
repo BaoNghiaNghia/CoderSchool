@@ -31,10 +31,12 @@ const styles = {
     color: Colors.white,
   },
   upperFieldUsername: {
-    top: height / 2 - 23,
+    top: height / 5*2 - 150,
+    left: width / 5*2
   },
   lowerFieldUsername: {
-    top: height / 2 + 3,
+    top: height / 5*2 + 150,
+    left: width / 5*2
   },
 };
 

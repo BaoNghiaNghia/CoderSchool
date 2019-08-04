@@ -4,12 +4,8 @@ import PropTypes from 'prop-types';
 
 import { Colors } from '../constants';
 
-/**
- * Get style for ScoreContainer
- * @param  {string} typeOfPlayer  'Player' or 'Computer'
- * @return {object}                Style object
- */
-function getScoreContainerStyle(typeOfPlayer) {
+
+const getScoreContainerStyle = (typeOfPlayer) => {
   if (typeOfPlayer === 'Player') {
     return styles.playerScoreContainer;
   } else if (typeOfPlayer === 'Computer') {
@@ -17,9 +13,23 @@ function getScoreContainerStyle(typeOfPlayer) {
   }
 }
 
-const Scoreboard = props => {
+const checkColorAcePlayer = (isAce) => {
+  if (isAce) {
+    return styles.backgroundAce
+  } else {
+    return styles.backgroundGray
+  }
+}
+
+const Scoreboard = ({
+  ...props
+}) => {
   return (
-    <View style={[styles.scoreContainer, getScoreContainerStyle(props.typeOfPlayer)]}>
+    <View style={[
+        styles.scoreContainer,
+        getScoreContainerStyle(props.typeOfPlayer),
+        checkColorAcePlayer(props.ace)
+      ]}>
       <Text style={styles.score}>{props.score}</Text>
     </View>
   );
@@ -32,9 +42,8 @@ Scoreboard.propTypes = {
 
 const styles = {
   scoreContainer: {
-    width: 100,
+    width: 200,
     height: 50,
-    backgroundColor: Colors.transparentBlack,
     alignSelf: 'center',
     justifyContent: 'center',
     alignItems: 'center',
@@ -58,11 +67,17 @@ const styles = {
     borderTopRightRadius: 50,
   },
   score: {
-    fontSize: 18,
+    fontSize: 25,
     fontWeight: '600',
     backgroundColor: Colors.transparent,
-    color: Colors.white,
+    color: Colors.black,
   },
+  backgroundAce: {
+    backgroundColor: Colors.orange
+  },
+  backgroundGray: {
+    backgroundColor: Colors.transparentBlack
+  }
 };
 
 export default Scoreboard;
