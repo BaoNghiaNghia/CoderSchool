@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { Alert, StatusBar, View, Text, StyleSheet } from 'react-native';
+import { Alert, StatusBar, View, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 import {
@@ -10,10 +10,9 @@ import {
     Scoreboard,
     Username,
 } from '../components';
-import { Colors, players, choices, MATCH_POINT } from '../constants';
+import { Colors, players, choices } from '../constants';
 import { calculateWhoWins, generateAlertMessage, generateComputerChoice } from '../utilities';
 import calculateWhoWinMatch from '../utilities/CalculateMatchWins';
-import showWinnerOfMatchDialog from '../utilities/showWinnerOfMatchDialog';
 
 export default class GameScreen extends Component {
     static navigationOptions = {
@@ -28,7 +27,7 @@ export default class GameScreen extends Component {
 
     componentWillUpdate(nextProps, nextState) {
         const winnerOfMatch = calculateWhoWinMatch(nextState['playerScore'], nextState['computerScore'])
-        showWinnerOfMatchDialog(winnerOfMatch, nextState['history'])
+        this.showWinnerOfMatchDialog(winnerOfMatch, nextState['history'])
     }
     
     onPressImageButton = (playerChoice) => {
@@ -51,6 +50,36 @@ export default class GameScreen extends Component {
             [{ text: 'OK', onPress: () => this.addPointsToScoreboard(winner) }]
         );
     }
+
+    showWinnerOfMatchDialog = (winnerOfMatch, history) => {
+        if (winnerOfMatch) {
+            if (winnerOfMatch === 'Player') {
+                history.push('won')
+            } else if (winnerOfMatch === 'Computer') {
+                history.push('lose')
+            } else {
+                history.push('tied')
+            }
+    
+            const countLose = history.filter((el) => {
+                return el === 'lose'
+            }).length
+    
+            const countWon= history.filter((el) => {
+                return el === 'won'
+            }).length
+    
+            const countTied = history.length - countLose - countWon
+    
+            Alert.alert(
+                `End Game`,
+                `${winnerOfMatch} Wins`,
+    
+                [{ text: 'OK', onPress: () => this.resetGame() }]
+            );
+        }
+    }
+    
 
     resetGame = () => {
         this.setState({
