@@ -13,6 +13,7 @@ import {
 import { Colors, players, choices, MATCH_POINT } from '../constants';
 import { calculateWhoWins, generateAlertMessage, generateComputerChoice } from '../utilities';
 import calculateWhoWinMatch from '../utilities/CalculateMatchWins';
+import showWinnerOfMatchDialog from '../utilities/showWinnerOfMatchDialog';
 
 export default class GameScreen extends Component {
     static navigationOptions = {
@@ -22,32 +23,20 @@ export default class GameScreen extends Component {
     state = {
         playerScore: 0,
         computerScore: 0,
+        history: [],
     };
+
+    componentWillUpdate(nextProps, nextState) {
+        const winnerOfMatch = calculateWhoWinMatch(nextState['playerScore'], nextState['computerScore'])
+        showWinnerOfMatchDialog(winnerOfMatch, nextState['history'])
+    }
     
     onPressImageButton = (playerChoice) => {
-        const { playerScore, computerScore } = this.state
-        
         const computerChoice = generateComputerChoice();
 
         const winner = calculateWhoWins(playerChoice, computerChoice);
 
-        const winnerOfMatch = calculateWhoWinMatch(playerScore, computerScore)
-
-        if (winnerOfMatch) {
-            this.showWinnerOfMatchDialog(winnerOfMatch)
-        } else {
-            this.showAlertDialog(winner, playerChoice, computerChoice);
-        }
-    }
-
-    showWinnerOfMatchDialog = (winnerOfMatch) => {
-
-        Alert.alert(
-            `End Game`,
-            `${winnerOfMatch} Wins`,
-
-            [{ text: 'OK', onPress: () => this.resetGame() }]
-        );
+        this.showAlertDialog(winner, playerChoice, computerChoice);
     }
 
     showAlertDialog(winner, playerChoice, computerChoice) {
@@ -71,19 +60,21 @@ export default class GameScreen extends Component {
     }
 
     addPointsToScoreboard(winner) {
-        const { playerScore, computerScore } = this.state
+        const { playerScore, computerScore, history } = this.state;
 
         switch (winner) {
             case 'Player':
                 this.setState({
                     playerScore: playerScore + 1,
                 });
-                break;
+            break;
+
             case 'Computer':
                 this.setState({
                     computerScore: computerScore + 1,
                 });
-                break;
+            break;
+
             default:
                 break;
         }
@@ -91,7 +82,6 @@ export default class GameScreen extends Component {
 
     render() {
         const { computerScore, playerScore } = this.state;
-
         return (
             <View style={styles.container}>
                 <StatusBar hidden={false} />
