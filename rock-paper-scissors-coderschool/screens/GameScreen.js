@@ -10,8 +10,9 @@ import {
     Scoreboard,
     Username,
 } from '../components';
-import { Colors } from '../constants';
+import { Colors, players, choices, MATCH_POINT } from '../constants';
 import { calculateWhoWins, generateAlertMessage, generateComputerChoice } from '../utilities';
+import calculateWhoWinMatch from '../utilities/CalculateMatchWins';
 
 export default class GameScreen extends Component {
     static navigationOptions = {
@@ -24,13 +25,34 @@ export default class GameScreen extends Component {
     };
     
     onPressImageButton = (playerChoice) => {
+        const { playerScore, computerScore } = this.state
+        
         const computerChoice = generateComputerChoice();
+
         const winner = calculateWhoWins(playerChoice, computerChoice);
-        this.showAlertDialog(winner, playerChoice, computerChoice);
+
+        const winnerOfMatch = calculateWhoWinMatch(playerScore, computerScore)
+
+        if (winnerOfMatch) {
+            this.showWinnerOfMatchDialog(winnerOfMatch)
+        } else {
+            this.showAlertDialog(winner, playerChoice, computerChoice);
+        }
+    }
+
+    showWinnerOfMatchDialog = (winnerOfMatch) => {
+
+        Alert.alert(
+            `End Game`,
+            `${winnerOfMatch} Wins`,
+
+            [{ text: 'OK', onPress: () => this.resetGame() }]
+        );
     }
 
     showAlertDialog(winner, playerChoice, computerChoice) {
-    const alertMessage = generateAlertMessage(playerChoice, computerChoice);
+        const alertMessage = generateAlertMessage(playerChoice, computerChoice);
+
         Alert.alert(
             `${winner} Wins`,
             `Player chose ${choices[playerChoice]}
@@ -39,6 +61,13 @@ export default class GameScreen extends Component {
 
             [{ text: 'OK', onPress: () => this.addPointsToScoreboard(winner) }]
         );
+    }
+
+    resetGame = () => {
+        this.setState({
+            playerScore: 0,
+            computerScore: 0
+        })
     }
 
     addPointsToScoreboard(winner) {
@@ -66,6 +95,7 @@ export default class GameScreen extends Component {
         return (
             <View style={styles.container}>
                 <StatusBar hidden={false} />
+
                 <View>
                     <FieldHalf typeOfPlayer={players[0]}>
                         <Scoreboard score={computerScore} ace={computerScore > playerScore ? true:false} typeOfPlayer={players[0]} />
@@ -91,10 +121,6 @@ export default class GameScreen extends Component {
     }
 }
 
-const choices = ['Rock', 'Paper', 'Scissors'];
-
-const players = ['Computer', 'Player'];
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -104,4 +130,9 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderColor: Colors.white,
   },
+  textCenter: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center'
+  }
 });

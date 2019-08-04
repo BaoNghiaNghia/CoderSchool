@@ -6,6 +6,7 @@ import {
 } from 'react-native'
 
 import Icon from 'react-native-vector-icons/FontAwesome'
+import Colors from '../constants/Colors';
 
 export default class SettingScreen extends Component {
     static navigationOptions = {
@@ -21,7 +22,9 @@ export default class SettingScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Button title="Sign Out" onPress={this.onSignOut} ></Button>
+                <View style={styles.button}>
+                    <Button title="Thoát game" onPress={this.onSignOut} ></Button>
+                </View>
             </View>
         )
     }
@@ -32,5 +35,11 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    button: {
+        marginTop: 20,
+        width: 200,
+        borderColor: Colors.orange,
+        borderRadius: 10
     }
 })

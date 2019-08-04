@@ -3,6 +3,7 @@ import {
     Text, View, StyleSheet,
     Button
 } from 'react-native'
+import Colors from '../constants/Colors';
 
 export default class WelcomeScreen extends Component {
     handleSignIn = () => {
@@ -17,10 +18,18 @@ export default class WelcomeScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Button title="Sign In" 
-                    onPress={this.handleSignIn} />
-                <Button title="Sign Up"
-                    onPress={this.handleSignUp} />
+                <View style={styles.button}>
+                    <Button
+                        transparent
+                        title="Đăng nhập" 
+                        onPress={this.handleSignIn} />
+                </View>
+                <View style={styles.button}>
+                    <Button 
+                        transparent
+                        title="Đăng kí"
+                        onPress={this.handleSignUp} />
+                </View>
             </View>
         )
     }
@@ -34,6 +43,8 @@ const styles = StyleSheet.create({
     },
     button: {
         marginTop: 20,
-        width: 40
+        width: 200,
+        borderColor: Colors.orange,
+        borderRadius: 10
     }
 })

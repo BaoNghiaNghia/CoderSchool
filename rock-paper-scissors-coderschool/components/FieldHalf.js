@@ -1,15 +1,10 @@
 import React from 'react';
 import { Dimensions, View } from 'react-native';
 
-import { Colors } from '../constants';
+import { choices } from '../constants';
 
-/**
- * Get style for fieldHalfContainer
- * @param  {string} typeOfPlayer  'Player' or 'Computer'
- * @return {object}                Style object
- */
 function getFieldHalfContainerStyle(typeOfPlayer) {
-  if (typeOfPlayer === 'Player') {
+  if (typeOfPlayer === choices[1]) {
     return styles.lowerFieldHalfContainer;
   } else if (typeOfPlayer === 'Computer') {
     return styles.upperFieldHalfContainer;

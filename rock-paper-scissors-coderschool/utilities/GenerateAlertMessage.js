@@ -1,9 +1,5 @@
-/**
- * Generating a message, based on the rules of the game, to display in the alert based on the outcome
- * @param  {number} playerChoice   A number from 0-2 where 0 represents rock, 1 represents paper and 2 respresents scissors
- * @param  {number} computerChoice A number from 0-2 where 0 represents rock, 1 represents paper and 2 respresents scissors
- * @return {string}                A message to display in the alert
- */
+import { messages } from "../constants";
+
 export default function generateAlertMessage(playerChoice, computerChoice) {
   if (playerChoice === computerChoice) {
     return messages[0];
@@ -26,9 +22,3 @@ export default function generateAlertMessage(playerChoice, computerChoice) {
     throw 'Invalid inputs';
   }
 }
-
-/**
- * Possible outcomes of the game
- * @type {Array}
- */
-const messages = ['Draw', 'Rock crushes Scissors', 'Paper covers Rock', 'Scissors cut Paper'];

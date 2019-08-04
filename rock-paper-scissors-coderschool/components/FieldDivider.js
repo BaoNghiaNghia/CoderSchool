@@ -1,18 +1,17 @@
 import React from 'react';
-import { Dimensions, View } from 'react-native';
+import { View } from 'react-native';
 
-import { Colors } from '../constants';
+import { Colors, SCREEN_HEIGHT, SCREEN_WIDTH } from '../constants';
 
 const FieldDivider = () => {
   return <View style={styles.divider} />;
 };
 
-const { height, width } = Dimensions.get('window');
 const styles = {
   divider: {
     position: 'absolute',
-    top: height / 5*2,
-    width: width,
+    top: SCREEN_HEIGHT / 5*2,
+    width: SCREEN_WIDTH,
     borderTopWidth: 1.5,
     borderColor: Colors.white,
   },

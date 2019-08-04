@@ -5,7 +5,7 @@ export default class SignUpScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text> Sign up screen </Text>
+                <Text> Sign Up Screen nè </Text>
             </View>
         )
     }
