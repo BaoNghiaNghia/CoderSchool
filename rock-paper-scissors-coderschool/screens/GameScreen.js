@@ -31,14 +31,14 @@ export default class GameScreen extends Component {
 
     showAlertDialog(winner, playerChoice, computerChoice) {
     const alertMessage = generateAlertMessage(playerChoice, computerChoice);
-    Alert.alert(
-        `${winner} Wins`,
-        `Player chose ${choices[playerChoice]}
-        \nComputer chose ${choices[computerChoice]}
-        \n${alertMessage}`,
+        Alert.alert(
+            `${winner} Wins`,
+            `Player chose ${choices[playerChoice]}
+            \nComputer chose ${choices[computerChoice]}
+            \n${alertMessage}`,
 
-        [{ text: 'OK', onPress: () => this.addPointsToScoreboard(winner) }]
-    );
+            [{ text: 'OK', onPress: () => this.addPointsToScoreboard(winner) }]
+        );
     }
 
     addPointsToScoreboard(winner) {

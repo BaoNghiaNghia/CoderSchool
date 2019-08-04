@@ -40,7 +40,7 @@ ImageButton.propTypes = {
 
 const styles = {
   imageButton: {
-    height: 60,
+    height: 50,
     width: 70,
     borderRadius: 5,
     backgroundColor: Colors.transparent,
