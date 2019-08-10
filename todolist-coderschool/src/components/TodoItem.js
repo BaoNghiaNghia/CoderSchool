@@ -8,8 +8,13 @@ const TodoItem = ({
   todo, idx, onToggleTodo, onDeleteTodo
 }) => {
   const statusStyle = {
-    borderColor: todo.status === 'Done' ? 'blue' : 'green',
-    borderWidth: 2,
+    borderColor: todo.status === 'Done' ? '#00b0ff' : '#10986b',
+    borderRightWidth: 7,
+    borderLeftWidth: 1,
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
+    backgroundColor: 'rgba(255, 255, 255, 0.7)',
+    filter: `blur(10px)`,
   }
 
   const onLongPress = todo => {
@@ -39,7 +44,7 @@ const TodoItem = ({
         onLongPress={() => onLongPress(todo)}
       >
           <Text style={styles.todoText}>
-            {idx + 1}: {todo.body}
+            {idx + 1}  |  {todo.body}
           </Text>
       </TouchableOpacity>
     </View>

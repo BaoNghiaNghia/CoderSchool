@@ -148,6 +148,9 @@ const styles = StyleSheet.create({
 		marginBottom: 70
 	},
 	createContainer: {
+		borderColor: '#D9D9D9',
+		borderWidth: 1,
+		borderStyle: 'dashed',
 		padding: 15,
 		marginHorizontal: 0,
 		alignItems: 'center',
