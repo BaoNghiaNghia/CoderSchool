@@ -8,7 +8,8 @@ const TodoItem = ({
   todo, idx, onToggleTodo, onDeleteTodo
 }) => {
   const statusStyle = {
-    backgroundColor: todo.status === 'Done' ? 'blue' : 'green'
+    borderColor: todo.status === 'Done' ? 'blue' : 'green',
+    borderWidth: 2,
   }
 
   const onLongPress = todo => {
@@ -50,7 +51,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
 	todoItem: {
-		margin: 5,
+    marginHorizontal: 15,
+    marginVertical: 5,
     padding: 10,
 		minHeight: 30,
 		color: 'white',
@@ -59,7 +61,7 @@ const styles = StyleSheet.create({
 	},
 	todoText: {
 		fontSize: 15,
-		color: 'white',
+		color: 'black',
 		fontWeight: 'bold'
 	}
 })

@@ -6,15 +6,21 @@ import { TODOS } from '../../constants/index'
 
 import { 
 	StyleSheet, View, Text,
-	Platform, StatusBar, SafeAreaView, TextInput, TouchableOpacity
+	Platform, StatusBar, SafeAreaView, TextInput, TouchableOpacity,
+	ImageBackground, KeyboardAvoidingView
 } from 'react-native'
+
+import ImageBackgroundURL from '../../../assets/image-container.jpg'
+
 import TodoItem from '../../components/TodoItem';
 import { ScrollView } from 'react-native-gesture-handler';
+
+let timer;
 
 export default class AllScreen extends Component {
 	static navigationOptions = ({ navigation }) => {
 		return {
-			title: 'All task',
+			header: null,
 			tabBarIcon: ({ tintColor }) => <Icon name="plus-circle" style={{color: tintColor, fontSize: 32 }} />,
 		}
 	}
@@ -37,6 +43,8 @@ export default class AllScreen extends Component {
 	onToggleTodo = id => {
 		const { todoList } = this.state;
 		const { navigation } = this.props;
+		
+		clearTimeout(timer)
 
 		const todo = todoList.find(todo => todo.id === id);
 		todo.status = todo.status === 'Done' ? 'Active' : 'Done';
@@ -44,11 +52,12 @@ export default class AllScreen extends Component {
 		todoList[foundIndex] = todo;
 		const newTodoList = [...todoList];
 
-		setTimeout(() => {
+
+		timer = setTimeout(() => {
 			navigation.navigate('SingleTodo', {
 			  updatedTodo: todo
 			});
-		  }, 1000);
+		}, 10);
 		
 		this.setState({
 			todoList: newTodoList
@@ -79,62 +88,75 @@ export default class AllScreen extends Component {
 	render () {
 		const { todoList, todoBody } = this.state;
 		return (
-				<SafeAreaView style={{flex:1, backgroundColor: '#fff', paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}}>
-					<ScrollView>
-						<View style={styles.container}>
-						{
-							todoList.map((todo, idx) => {
-								return <TodoItem 
-									key={todo.body} 
-									todo={todo}
-									idx={idx}
-									onToggleTodo={this.onToggleTodo}
-									onDeleteTodo={this.onDeleteTodo}/>;
-							})
-						}
+			<SafeAreaView style={{
+				flex:1, 
+				backgroundColor: 'transparent', 
+				paddingTop: Platform.OS === 'android' 
+					// ? StatusBar.currentHeight 
+					? 0 : 0}}>
+				<ImageBackground style={styles.imageContainer} source={ImageBackgroundURL}>
+					<KeyboardAvoidingView
+						enabled
+						behavior="height"
+						keyboardVerticalOffset={120}
+					>
+						<ScrollView>
+							<View style={styles.container}>
+							{
+								todoList.map((todo, idx) => {
+									return <TodoItem 
+										key={todo.body} 
+										todo={todo}
+										idx={idx}
+										onToggleTodo={this.onToggleTodo}
+										onDeleteTodo={this.onDeleteTodo}/>;
+								})
+							}
+							</View>
+						<View style={styles.createContainer}>
+							<TextInput
+								value={todoBody}
+								style={styles.todoInput}
+								onChangeText={text => this.onChangeText(text)}
+								/>
+							<TouchableOpacity style={styles.button} onPress={this.onSubmitTodo}>
+								<Text style={styles.buttonText}><Icon name="upload" size={20}/></Text>
+							</TouchableOpacity>
 						</View>
-					<View style={styles.inputContainer}>
-						<TextInput
-							value={todoBody}
-							style={styles.todoInput}
-							onChangeText={text => this.onChangeText(text)}
-							/>
-						<TouchableOpacity style={styles.button} onPress={this.onSubmitTodo}>
-							<Text style={styles.buttonText}>Submit</Text>
-						</TouchableOpacity>
-					</View>
-					</ScrollView>
-				</SafeAreaView>
+						</ScrollView>
+					</KeyboardAvoidingView>
+				</ImageBackground>
+			</SafeAreaView>
 		);
 	}
 }
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1
+		flex: 0.4
 	},
 	todoInput: {
-		width: '95%',
-		minHeight: 30,
+		width: '80%',
 		color: 'black',
 		borderWidth: 1,
 		marginTop: '20%',
 		marginBottom: '5%',
 		borderColor: 'grey',
 		borderRadius: 5,
-		padding: 10
+		paddingVertical: 10,
+		paddingHorizontal: 7,
+		marginBottom: 70
 	},
-	inputContainer: {
-		width: '90%',
-		marginTop: 0,
-		padding: 40,
-		marginBottom: '10%',
+	createContainer: {
+		padding: 15,
+		marginHorizontal: 0,
 		alignItems: 'center',
-		justifyContent: 'center'
+		justifyContent: 'space-between',
+		flexDirection: 'row'
 	},
 	button: {
 		height: 50,
-		width: '50%',
+		width: 60,
 		borderRadius: 10,
 		alignItems: 'center',
 		backgroundColor: 'blue',
@@ -143,5 +165,9 @@ const styles = StyleSheet.create({
 	buttonText: {
 		color: 'white',
 		fontWeight: 'bold'
+	},
+	imageContainer: {
+		flex: 1,
+		resizeMode: 'cover'
 	}
 });

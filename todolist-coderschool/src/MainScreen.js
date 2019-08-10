@@ -30,9 +30,10 @@ const AppTabNavigator = createBottomTabNavigator({
         screen: ActiveScreen
     }
 }, {
-    animationEnabled: false,
+    animationEnabled: true,
     swipeEnabled: true,
     tabBarPosition: 'bottom',
+    headerMode: 'none',
     tabBarOptions: {
         activeTintColor: "#000",
         inactiveTintColor: "#ddd",
