@@ -7,7 +7,7 @@ import { TODOS } from '../../constants/index'
 import { 
 	StyleSheet, View, Text,
 	Platform, StatusBar, SafeAreaView, TextInput, TouchableOpacity,
-	ImageBackground, KeyboardAvoidingView
+	ImageBackground, KeyboardAvoidingView,
 } from 'react-native'
 
 import ImageBackgroundURL from '../../../assets/image-container.jpg'
@@ -15,12 +15,13 @@ import ImageBackgroundURL from '../../../assets/image-container.jpg'
 import TodoItem from '../../components/TodoItem';
 import { ScrollView } from 'react-native-gesture-handler';
 
+import XDate from 'xdate'
+
 let timer;
 
 export default class AllScreen extends Component {
 	static navigationOptions = ({ navigation }) => {
 		return {
-			header: null,
 			tabBarIcon: ({ tintColor }) => <Icon name="plus-circle" style={{color: tintColor, fontSize: 32 }} />,
 		}
 	}
@@ -83,17 +84,19 @@ export default class AllScreen extends Component {
 			todoList: newTodoList,
 			todoBody: ''
 		})
-	  };
+	};
 
 	render () {
 		const { todoList, todoBody } = this.state;
 		return (
-			<SafeAreaView style={{
-				flex:1, 
-				backgroundColor: 'transparent', 
-				paddingTop: Platform.OS === 'android' 
-					// ? StatusBar.currentHeight 
-					? 0 : 0}}>
+			// <SafeAreaView style={{
+			// 	flex: 1, 
+			// 	backgroundColor: '#CECECE', 
+			// 	paddingTop: Platform.OS === 'android' 
+			// 		? StatusBar.currentHeight 
+			// 		: 0
+			// 	}}	
+			// >
 				<ImageBackground style={styles.imageContainer} source={ImageBackgroundURL}>
 					<KeyboardAvoidingView
 						enabled
@@ -118,6 +121,8 @@ export default class AllScreen extends Component {
 								value={todoBody}
 								style={styles.todoInput}
 								onChangeText={text => this.onChangeText(text)}
+								placeholder={new XDate().toString('dd/MM/yyyy - HH:mm')}
+								placeholderTextColor = "#7E7E7E"
 								/>
 							<TouchableOpacity style={styles.button} onPress={this.onSubmitTodo}>
 								<Text style={styles.buttonText}><Icon name="upload" size={20}/></Text>
@@ -126,7 +131,7 @@ export default class AllScreen extends Component {
 						</ScrollView>
 					</KeyboardAvoidingView>
 				</ImageBackground>
-			</SafeAreaView>
+			// </SafeAreaView>
 		);
 	}
 }
@@ -144,15 +149,13 @@ const styles = StyleSheet.create({
 		borderColor: 'grey',
 		borderRadius: 5,
 		paddingVertical: 10,
-		paddingHorizontal: 7,
+		paddingHorizontal: 10,
 		marginBottom: 70
 	},
 	createContainer: {
-		borderColor: '#D9D9D9',
-		borderWidth: 1,
-		borderStyle: 'dashed',
 		padding: 15,
 		marginHorizontal: 0,
+		marginVertical: 0,
 		alignItems: 'center',
 		justifyContent: 'space-between',
 		flexDirection: 'row'
@@ -163,7 +166,12 @@ const styles = StyleSheet.create({
 		borderRadius: 10,
 		alignItems: 'center',
 		backgroundColor: 'blue',
-		justifyContent: 'center'
+		justifyContent: 'center',
+        shadowColor: '#3c72ff',
+        shadowOffset: { width: 0, height: 10 },
+        shadowOpacity: 0.7,
+        shadowRadius: 2,
+        elevation: 15
 	},
 	buttonText: {
 		color: 'white',

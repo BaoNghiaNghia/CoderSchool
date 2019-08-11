@@ -11,12 +11,19 @@ export default class CompleteScreen extends Component {
     tabBarIcon: ({ tintColor }) => <Icon name="check" style={{color: tintColor, fontSize: 20 }} />
   }
   render () {
-    return (
-      <SafeAreaView style={{flex: 2, backgroundColor: '#fff', paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}}>  
+    return (  
+      // <SafeAreaView style={{
+			// 	flex: 1, 
+			// 	backgroundColor: '#CECECE', 
+			// 	paddingTop: Platform.OS === 'android' 
+			// 		? StatusBar.currentHeight 
+      //     : 0
+      //   }}		
+			// >
         <View style={styles.container}>
           <Text> Complete screen </Text>
         </View>
-      </SafeAreaView>
+      // </SafeAreaView>
     );
   }
 }

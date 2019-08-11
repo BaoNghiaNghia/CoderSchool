@@ -13,11 +13,18 @@ export default class ActiveScreen extends Component {
 
     render () {
         return (
-            <SafeAreaView style={{flex: 2, backgroundColor: '#fff', paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0}}>
+            // <SafeAreaView style={{
+			// 	flex: 1, 
+			// 	backgroundColor: '#CECECE', 
+			// 	paddingTop: Platform.OS === 'android' 
+			// 		? StatusBar.currentHeight 
+            //         : 0
+            //     }}
+			// >
                 <View style={styles.container}>
                     <Text> Avtive screen </Text>
                 </View>
-            </SafeAreaView>
+            // </SafeAreaView>
         );
     }
 }
