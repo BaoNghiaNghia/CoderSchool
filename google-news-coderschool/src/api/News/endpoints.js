@@ -1,0 +1,1 @@
+export const NEWS_V2_ENDPOINT = '/v2/top-headlines'
